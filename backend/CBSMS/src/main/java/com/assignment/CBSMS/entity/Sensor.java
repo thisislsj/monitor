@@ -10,11 +10,20 @@ public class Sensor {
     private String name;
     private String type;
     private Integer threshold;
+    private NotificationSettings notificationSettings;
     
     public Sensor(String id, String name, String type) {
         Id = id;
         this.name = name;
         this.type = type;
+    }
+
+    public NotificationSettings getNotificationSettings() {
+        return notificationSettings;
+    }
+
+    public void setNotificationSettings(NotificationSettings notificationSettings) {
+        this.notificationSettings = notificationSettings;
     }
 
     public String getSensorCode() {

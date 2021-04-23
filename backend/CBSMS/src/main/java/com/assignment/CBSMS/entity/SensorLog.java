@@ -11,6 +11,7 @@ public class SensorLog {
     private String sensorCode;
     private String dataValue;
     private Date date;
+    private boolean alerted = false;
 
 
     public String getData(){
@@ -21,8 +22,32 @@ public class SensorLog {
         return date;
     }
 
-    public String getSensorId(){
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
+    }
+
+    public String getSensorCode() {
         return sensorCode;
+    }
+
+    public void setSensorCode(String sensorCode) {
+        this.sensorCode = sensorCode;
+    }
+
+    public String getDataValue() {
+        return dataValue;
+    }
+
+    public boolean isAlerted() {
+        return alerted;
+    }
+
+    public void setAlerted(boolean alerted) {
+        this.alerted = alerted;
     }
 
     public void setDataValue(String data){
@@ -32,12 +57,5 @@ public class SensorLog {
     public void setDate(Date date){
         this.date = date;
     }
-
-    public void setSensorId(String sensorId){
-        this.sensorCode = sensorId;
-    }
-
-
-
     
 }

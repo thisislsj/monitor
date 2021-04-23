@@ -9,10 +9,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 
-@RepositoryRestResource(collectionResourceRel = "sensorlog", path = "sensorlog")
+@RepositoryRestResource // (collectionResourceRel = "sensorlog", path = "sensorlog")
 public interface SensorLogRepository extends MongoRepository<SensorLog,String> {
 
     List<SensorLog> findBySensorId(@Param("sensorCode") String sensorCode);
+
+    List<SensorLog> findAll();
 
     
 }
