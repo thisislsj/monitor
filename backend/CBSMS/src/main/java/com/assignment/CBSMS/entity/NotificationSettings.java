@@ -1,31 +1,11 @@
 package com.assignment.CBSMS.entity;
 
-import org.springframework.data.annotation.Id;
-
 public class NotificationSettings {
 
-    @Id private String id;
-    private String sensorCode;
-    private boolean byEmail;
-    private boolean byPhoneCall;
-    private boolean bySMS;
+    private boolean byEmail = true;
+    private boolean byPhoneCall = true;
+    private boolean bySMS = true ;
 
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getSensorCode() {
-        return sensorCode;
-    }
-
-    public void setSensorCode(String sensorCode) {
-        this.sensorCode = sensorCode;
-    }
 
     public boolean isByEmail() {
         return byEmail;

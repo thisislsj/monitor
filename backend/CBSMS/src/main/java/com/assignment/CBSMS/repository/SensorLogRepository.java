@@ -12,7 +12,9 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource // (collectionResourceRel = "sensorlog", path = "sensorlog")
 public interface SensorLogRepository extends MongoRepository<SensorLog,String> {
 
-    List<SensorLog> findBySensorId(@Param("sensorCode") String sensorCode);
+    List<SensorLog> findFirstBySensorCode(@Param("sensorCode") String sensorCode);
+
+    SensorLog findFirstById(String Id);
 
     List<SensorLog> findAll();
 

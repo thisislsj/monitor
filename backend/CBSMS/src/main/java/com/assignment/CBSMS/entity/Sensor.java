@@ -12,12 +12,7 @@ public class Sensor {
     private Integer threshold;
     private NotificationSettings notificationSettings;
     
-    public Sensor(String id, String name, String type) {
-        Id = id;
-        this.name = name;
-        this.type = type;
-    }
-
+    
     public NotificationSettings getNotificationSettings() {
         return notificationSettings;
     }

@@ -8,7 +8,7 @@ public class HomeController {
     
 
     @GetMapping(value = "/")
-    public String testRoot(){
+    public String getRoot(){
         return "Rest is Working Fine!!";
     }
 

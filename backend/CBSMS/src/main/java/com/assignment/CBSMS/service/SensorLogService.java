@@ -8,6 +8,12 @@ public interface SensorLogService {
 
     List<SensorLog> findAll();
 
-    SensorLog updateAlertedById(String Id); 
+    SensorLog updateAlertedById(String Id, boolean alerted);
+    
+    SensorLog saveOrUpdate(SensorLog sensorLog);
+
+    SensorLog findFirstById(String Id);
+
+    // SensorLog saveOrUpdateBySensorCode(String sensorCode, SensorLog sensorLog);
     
 }
