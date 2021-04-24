@@ -6,19 +6,20 @@ import org.springframework.data.annotation.Id;
 
 public class SensorLog {
 
-    @Id private String Id;
+    @Id private String id;
 
     private String sensorCode;
     private Integer dataValue;
     private Date date;
     private boolean alerted = false;
 
+
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getSensorCode() {

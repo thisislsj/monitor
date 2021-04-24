@@ -1,4 +1,4 @@
-package com.assignment.CBSMS;
+package com.assignment.CBSMS.util;
 
 import com.assignment.CBSMS.entity.NotificationSettings;
 import com.assignment.CBSMS.entity.Sensor;

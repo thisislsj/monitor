@@ -2,11 +2,11 @@ package com.assignment.CBSMS.controller;
 
 import java.util.List;
 
-import com.assignment.CBSMS.NotificationManager;
 import com.assignment.CBSMS.entity.Sensor;
 import com.assignment.CBSMS.entity.SensorLog;
 import com.assignment.CBSMS.service.SensorLogService;
 import com.assignment.CBSMS.service.SensorService;
+import com.assignment.CBSMS.util.NotificationManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

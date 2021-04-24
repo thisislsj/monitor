@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 public class Sensor {
 
     @Id
-    private String Id;
+    private String id;
     private String sensorCode;
     private String name;
     private String type;
@@ -15,6 +15,14 @@ public class Sensor {
     
     public NotificationSettings getNotificationSettings() {
         return notificationSettings;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setNotificationSettings(NotificationSettings notificationSettings) {
@@ -35,14 +43,6 @@ public class Sensor {
 
     public void setThreshold(Integer threshold) {
         this.threshold = threshold;
-    }
-
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String id) {
-        Id = id;
     }
 
     public String getName() {

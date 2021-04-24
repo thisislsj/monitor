@@ -18,5 +18,7 @@ public interface SensorRepository extends MongoRepository<Sensor, String> {
     List<Sensor> finaAllAnd();
 
     Sensor findFirstBySensorCode(String sensorCode);
+
+    Sensor findFirstById(String id);
     
 }

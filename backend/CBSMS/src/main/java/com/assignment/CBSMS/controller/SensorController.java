@@ -1,5 +1,7 @@
 package com.assignment.CBSMS.controller;
 
+import java.util.List;
+
 import com.assignment.CBSMS.entity.Sensor;
 import com.assignment.CBSMS.service.SensorService;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @RequestMapping("/sensors")
 public class SensorController {
@@ -20,8 +23,8 @@ public class SensorController {
 
 
     @GetMapping(value = "")
-    public String getAll(){
-        return "Response from sensor logs";
+    public List<Sensor> getAll(){
+        return sensorService.findAll();
     }
 
     @PostMapping(value = "")
@@ -30,7 +33,7 @@ public class SensorController {
     }
 
     @GetMapping(value = "/{id}")
-    public Sensor getById(@PathVariable String id){
+    public Sensor getById(@PathVariable(value = "id") String id){
         return sensorService.findById(id);
     }
 

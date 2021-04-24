@@ -31,11 +31,9 @@ public class SensorServiceImpl implements SensorService {
     }
 
     @Override
-    public Sensor findById(String _id) {
+    public Sensor findById(String id) {
 
-        Optional<Sensor> optionalSensor = sensorRepository.findById(_id);
-
-        return optionalSensor.get();
+        return sensorRepository.findFirstById(id);
 
     }
 
