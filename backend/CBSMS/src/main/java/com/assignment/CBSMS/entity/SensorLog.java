@@ -10,7 +10,10 @@ public class SensorLog {
 
     private String sensorCode;
     private Integer dataValue;
+
+    // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
+    
     private boolean alerted = false;
 
 

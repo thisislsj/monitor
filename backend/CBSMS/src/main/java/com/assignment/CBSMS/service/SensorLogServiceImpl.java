@@ -1,5 +1,6 @@
 package com.assignment.CBSMS.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,14 +49,10 @@ public class SensorLogServiceImpl implements SensorLogService{
         
     }
 
-    // @Override
-    // public SensorLog saveOrUpdateBySensorCode(String sensorCode, SensorLog sensorLog) {
-
-    //     SensorLog sensorLog2 = sensorLogRepository.findBySensorCode(sensorCode);
-
-    //     return null;
-    // } 
-
+    @Override
+    public SensorLog findFirstByDate(Date date) {
+        return sensorLogRepository.findFirstByDate(date);
+    }
     
     
 }

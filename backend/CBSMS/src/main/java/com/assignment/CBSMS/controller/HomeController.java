@@ -9,6 +9,7 @@ public class HomeController {
 
     @GetMapping(value = "/")
     public String getRoot(){
+        System.out.println("Reached Root");
         return "Rest is Working Fine!!";
     }
 

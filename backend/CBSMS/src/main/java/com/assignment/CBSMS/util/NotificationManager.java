@@ -3,6 +3,7 @@ package com.assignment.CBSMS.util;
 import com.assignment.CBSMS.entity.NotificationSettings;
 import com.assignment.CBSMS.entity.Sensor;
 import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -18,16 +19,24 @@ public class NotificationManager {
     public void NotifyUserFromSensor(Sensor sensor){
 
         NotificationSettings notificationSettings = sensor.getNotificationSettings();
-        
 
-        if(notificationSettings.isByEmail()){
+        // boolean isEmailEnabled = notificationSettings.isByEmail();
+        boolean isEmailEnabled = false;
+
+        if(isEmailEnabled){
             
             // Send Email to the User
             // Through Mailgun
 
-            JsonNode nodeReturn = mailgunService.sendEmail("asjath.husni@gmail.com", "Sensor Alert!", "Sensor Value is Exceeded than the Threshold");
-            System.out.println(nodeReturn);
-            System.out.println("Email Sent Successfully");
+            JsonNode nodeReturn;
+            try {
+                nodeReturn = mailgunService.sendEmail("asjath.husni@gmail.com", "Sensor Alert!", "Sensor Value is Exceeded than the Threshold");
+                System.out.println(nodeReturn);
+                System.out.println("Email Sent Successfully");
+            } catch (UnirestException e) {
+                e.printStackTrace();
+            }
+           
 
 
         }

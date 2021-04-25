@@ -1,7 +1,6 @@
 package com.assignment.CBSMS.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.assignment.CBSMS.entity.Sensor;
 import com.assignment.CBSMS.repository.SensorRepository;

@@ -1,5 +1,6 @@
 package com.assignment.CBSMS.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import com.assignment.CBSMS.entity.SensorLog;
@@ -17,6 +18,8 @@ public interface SensorLogRepository extends MongoRepository<SensorLog,String> {
     SensorLog findFirstById(String Id);
 
     List<SensorLog> findAll();
+
+    SensorLog findFirstByDate(Date date);
 
     
 }

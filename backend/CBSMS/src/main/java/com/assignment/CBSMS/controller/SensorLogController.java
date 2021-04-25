@@ -1,5 +1,6 @@
 package com.assignment.CBSMS.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import com.assignment.CBSMS.entity.Sensor;
@@ -8,9 +9,11 @@ import com.assignment.CBSMS.service.SensorLogService;
 import com.assignment.CBSMS.service.SensorService;
 import com.assignment.CBSMS.util.NotificationManager;
 
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sensorlogs")
 public class SensorLogController {
+
+    Logger logger = LoggerFactory.getLogger(SensorLogController.class);
 
     @Autowired
     SensorLogService sensorLogService;
@@ -44,11 +49,19 @@ public class SensorLogController {
 
     }
 
-    @PutMapping(value = "/updateCheck/{id}")
-    public SensorLog setAlertedValue(@PathVariable String Id){
+    @PutMapping(value = "/updateCheck")
+    public SensorLog setAlertedValue(@RequestBody String reqBody){
 
-        SensorLog sensorLog = sensorLogService.findFirstById(Id);
+        JSONObject reqBodyJSON = new JSONObject(reqBody);
+
+        System.out.println("Data " + reqBodyJSON.toString());
+
+
+        // SensorLog sensorLog = sensorLogService.findFirstByDate((Date) reqBodyJSON);
+        SensorLog sensorLog = sensorLogService.findFirstById(reqBodyJSON.getString("_id"));
         Sensor sensor = sensorService.findBySensorCode(sensorLog.getSensorCode());
+
+        logger.info("Update Checked");
 
 
         //check if the value is violated the threadshold and set alerted as true
@@ -62,7 +75,7 @@ public class SensorLogController {
         };
         
 
-        return sensorLogService.updateAlertedById(Id, alerted);
+        return sensorLogService.updateAlertedById(sensorLog.getId(), alerted);
         
     }
 
