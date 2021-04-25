@@ -53,6 +53,11 @@ public class SensorLogServiceImpl implements SensorLogService{
     public SensorLog findFirstByDate(Date date) {
         return sensorLogRepository.findFirstByDate(date);
     }
+
+    @Override
+    public List<SensorLog> findAllBySensorCode(String sensorCode) {
+        return sensorLogRepository.findAllBySensorCode(sensorCode);
+    }
     
     
 }

@@ -15,6 +15,8 @@ public interface SensorLogRepository extends MongoRepository<SensorLog,String> {
 
     List<SensorLog> findFirstBySensorCode(@Param("sensorCode") String sensorCode);
 
+    List<SensorLog> findAllBySensorCode(@Param("sensorCode") String sensorCode);
+
     SensorLog findFirstById(String Id);
 
     List<SensorLog> findAll();

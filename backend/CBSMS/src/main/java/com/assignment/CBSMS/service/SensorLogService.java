@@ -9,6 +9,8 @@ public interface SensorLogService {
 
     List<SensorLog> findAll();
 
+    List<SensorLog> findAllBySensorCode(String sensorCode);
+
     SensorLog updateAlertedById(String Id, boolean alerted);
     
     SensorLog saveOrUpdate(SensorLog sensorLog);
