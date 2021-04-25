@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "24365590-1644-437f-b347-81276765972d",
+		"name": "CMSMS-PROJECT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Sensor",
+			"item": [
+				{
+					"name": "Create Sensor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sensorCode\": \"TMP-002\",\r\n    \"name\": \"Living Room Temperature\",\r\n    \"type\": \"Temperature\",\r\n    \"threshold\": \"40\",\r\n    \"notificationSettings\": {\r\n        \"byEmail\": true,\r\n        \"byPhoneCall\": true,\r\n        \"bySMS\": false\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/sensors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sensors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Sensors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/sensors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sensors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sensor By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/sensors/6083e9b26a51424433650d45",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sensors",
+								"6083e9b26a51424433650d45"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SensorLog",
+			"item": [
+				{
+					"name": "Get Sensor Logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/sensorlogs",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sensorlogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Sensor Logs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sensorCode\": \"TMP-001\",\r\n    \"dataValue\": 45,\r\n    \"date\" : \"2021-04-24T18:34:33.000+00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/sensorlogs",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sensorlogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NIFI Post Logs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sensorCode\": \"TMP-001\",\r\n    \"dataValue\": 38,\r\n    \"date\" : {\r\n        \"$date\" : \"2021-04-24T18:34:33.000+00:00\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9091/contentListener",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"contentListener"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Check",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"6084434e6c45827ace3905a0\",\r\n    \"sensorCode\": \"TMP-001\",\r\n    \"dataValue\": 45,\r\n    \"date\": \"2021-04-24T18:34:33.000+00:00\",\r\n    \"alerted\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/sensorlogs/updateCheck",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sensorlogs",
+								"updateCheck"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8080"
+		}
+	]
+}

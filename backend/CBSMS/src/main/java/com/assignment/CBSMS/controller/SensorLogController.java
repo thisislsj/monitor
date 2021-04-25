@@ -1,6 +1,5 @@
 package com.assignment.CBSMS.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import com.assignment.CBSMS.entity.Sensor;
@@ -73,7 +72,6 @@ public class SensorLogController {
             notificationManager.NotifyUserFromSensor(sensor);
         
         };
-        
 
         return sensorLogService.updateAlertedById(sensorLog.getId(), alerted);
         

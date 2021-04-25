@@ -1,0 +1,41 @@
+[33mcommit 876436eb53ebaf05bef7f2ce1e2a4b9dd958a939[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: RexzZzY <asjath.husni@gmail.com>
+Date:   Sat Apr 24 16:14:21 2021 +0530
+
+    Mailgun Service Added
+
+[33mcommit 4f9b3737737cd529af41f32bcd72cac698ce1172[m
+Author: RexzZzY <asjath.husni@gmail.com>
+Date:   Sat Apr 24 15:38:17 2021 +0530
+
+    Sensor Controller Issue Fixed and Updated
+
+[33mcommit c42c53d529ef410e22de0800d9006b0623e7433e[m
+Author: RexzZzY <asjath.husni@gmail.com>
+Date:   Sat Apr 24 15:21:05 2021 +0530
+
+    Rest Controllers are implemented
+
+[33mcommit 4db39c55c4b79ff7aa392f98590ed931f285f5c2[m
+Author: RexzZzY <asjath.husni@gmail.com>
+Date:   Fri Apr 23 20:16:50 2021 +0530
+
+    Sensor Log is Updated with CRUD functions
+
+[33mcommit d0cdd01ab9ad1577bbd81a15bf21bcb8b4e14c41[m
+Author: RexzZzY <asjath.husni@gmail.com>
+Date:   Fri Apr 23 19:18:08 2021 +0530
+
+    Basic Application Skeleton is Created and Updated
+
+[33mcommit 4f6aefff3788967aec1306f011349d7b02a0b15e[m
+Author: RexzZzY <asjath.husni@gmail.com>
+Date:   Fri Apr 23 05:03:00 2021 +0530
+
+    spring boot initialization
+
+[33mcommit 5c63cfa50c5917a28609ef9b517d2cc5f2720f55[m
+Author: RexzZzY <asjath.husni@gmail.com>
+Date:   Fri Apr 23 05:01:19 2021 +0530
+
+    first commit
