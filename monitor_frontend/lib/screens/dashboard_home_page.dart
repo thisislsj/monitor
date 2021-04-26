@@ -1,33 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:monitor_frontend/custom_widgets/sensor_grid_card.dart';
+import 'package:monitor_frontend/models/sensor.dart';
+import 'package:monitor_frontend/services/sensor_service.dart';
 
-class DashboardHome extends StatelessWidget {
-  final List<String> elements = [
-    "Zero",
-    "One",
-    "Two",
-    "Three",
-    "Four",
-    "Five",
-    "Six",
-    "Seven",
-    "Eight",
-    "Nine",
-    "Ten"
-  ];
+class DashBoardHome extends StatefulWidget {
+  @override
+  _DashBoardHomeState createState() => _DashBoardHomeState();
+}
+
+class _DashBoardHomeState extends State<DashBoardHome> {
+  gridview(AsyncSnapshot<List<Sensor>> snapshot) {
+    Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: GridView.count(
+        crossAxisCount: 2,
+        mainAxisSpacing: 4,
+        crossAxisSpacing: 4,
+        children: snapshot.data.map(
+          (sensor) {
+            return GestureDetector(
+              child: GridTile(
+                child: SensorCard(sensor: sensor),
+              ),
+              onTap: sensorCardClick(sensor),
+            );
+          },
+        ).toList(),
+      ),
+    );
+  }
+
+  sensorCardClick(Sensor sensor) {
+    print("Tapped ${sensor.sensorName}");
+  }
+
+  circularProgress() {
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  }
 
   @override
-  Widget build(context) => Scaffold(
-      body: GridView.extent(
-          maxCrossAxisExtent: 130.0,
-          crossAxisSpacing: 20.0,
-          mainAxisSpacing: 20.0,
-          children: elements
-              .map((el) => Card(
-                  child: Center(
-                      child: Padding(
-                          padding: EdgeInsets.all(8.0), child: Text(el)))))
-              .toList()));
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Flexible(
+            child: FutureBuilder<List<Sensor>>(
+                future: SensorService.getAllSensors(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Error ${snapshot.error}');
+                  }
+                  if (snapshot.hasData) {
+                    //gridview
+                    return gridview(snapshot);
+                  }
+                  return circularProgress();
+                }),
+          ),
+        ],
+      ),
+    );
+  }
 }
+
+// class DashboardHome extends StatelessWidget {
+//   final List<String> elements = [
+//     "Zero",
+//     "One",
+//     "Two",
+//     "Three",
+//     "Four",
+//     "Five",
+//     "Six",
+//     "Seven",
+//     "Eight",
+//     "Nine",
+//     "Ten"
+//   ];
+
+//   @override
+//   Widget build(context) => Scaffold(
+//       body: GridView.extent(
+//           maxCrossAxisExtent: 130.0,
+//           crossAxisSpacing: 20.0,
+//           mainAxisSpacing: 20.0,
+//           children: elements
+//               .map((el) => Card(
+//                   child: Center(
+//                       child: Padding(
+//                           padding: EdgeInsets.all(8.0), child: Text(el)))))
+//               .toList()));
+// }
 
 // class DashboardHome extends StatefulWidget {
 //   @override
