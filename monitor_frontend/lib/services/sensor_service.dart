@@ -8,6 +8,7 @@ class SensorService {
   static Future<List<Sensor>> getAllSensors() async {
     try {
       final response = await http.get(Uri.parse("$url/sensors"));
+      print(response.body);
       if (response.statusCode == 200) {
         List<Sensor> list = parseSensors(response.body);
         return list;
@@ -15,6 +16,7 @@ class SensorService {
         throw Exception("Error getting all sensors");
       }
     } catch (e) {
+      print("error catched");
       throw Exception(e.toString());
     }
   }

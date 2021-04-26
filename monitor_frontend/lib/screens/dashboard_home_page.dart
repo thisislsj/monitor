@@ -44,9 +44,9 @@ class _DashBoardHomeState extends State<DashBoardHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        //mainAxisSize: MainAxisSize.min,
         children: [
           Flexible(
             child: FutureBuilder<List<Sensor>>(
@@ -57,7 +57,27 @@ class _DashBoardHomeState extends State<DashBoardHome> {
                   }
                   if (snapshot.hasData) {
                     //gridview
-                    return gridview(snapshot);
+                    //return gridview(snapshot);
+                    return GridView.extent(
+                      maxCrossAxisExtent: 170.0,
+                      crossAxisSpacing: 20.0,
+                      mainAxisSpacing: 20.0,
+
+                      // crossAxisCount: 4,
+                      // mainAxisSpacing: 4,
+                      // crossAxisSpacing: 4,
+                      children: snapshot.data.map(
+                        (sensor) {
+                          return SensorCard(sensor: sensor);
+                          // return GestureDetector(
+                          //   child: GridTile(
+                          //     child: SensorCard(sensor: sensor),
+                          //   ),
+                          //   onTap: sensorCardClick(sensor),
+                          // );
+                        },
+                      ).toList(),
+                    );
                   }
                   return circularProgress();
                 }),
