@@ -1,38 +1,16 @@
-// import 'package:flutter/material.dart';
-
-// class SingleSensorPage extends StatefulWidget {
-//   SingleSensorPage({Key key}) : super(key: key);
-
-//   @override
-//   _SingleSensorPageState createState() => _SingleSensorPageState();
-// }
-
-// class _SingleSensorPageState extends State<SingleSensorPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: Text("data"),
-//     );
-//   }
-// }
-
-/// Example of timeseries chart with a custom number of ticks
-///
-/// The tick count can be set by setting the [desiredMinTickCount] and
-/// [desiredMaxTickCount] for automatically adjusted tick counts (based on
-/// how 'nice' the ticks are) or [desiredTickCount] for a fixed tick count.
+/// Line chart example
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
-class CustomMeasureTickCount extends StatelessWidget {
+class PointsLineChart extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
 
-  CustomMeasureTickCount(this.seriesList, {this.animate});
+  PointsLineChart(this.seriesList, {this.animate});
 
-  /// Creates a [TimeSeriesChart] with sample data and no transition.
-  factory CustomMeasureTickCount.withSampleData() {
-    return new CustomMeasureTickCount(
+  /// Creates a [LineChart] with sample data and no transition.
+  factory PointsLineChart.withSampleData() {
+    return new PointsLineChart(
       _createSampleData(),
       // Disable animations for image tests.
       animate: false,
@@ -41,45 +19,36 @@ class CustomMeasureTickCount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new charts.TimeSeriesChart(seriesList,
+    return new charts.LineChart(seriesList,
         animate: animate,
-
-        /// Customize the measure axis to have 2 ticks,
-        primaryMeasureAxis: new charts.NumericAxisSpec(
-            tickProviderSpec:
-                new charts.BasicNumericTickProviderSpec(desiredTickCount: 2)));
+        defaultRenderer: new charts.LineRendererConfig(includePoints: true));
   }
 
   /// Create one series with sample hard coded data.
-  static List<charts.Series<MyRow, DateTime>> _createSampleData() {
+  static List<charts.Series<LinearSales, int>> _createSampleData() {
     final data = [
-      new MyRow(new DateTime(2017, 9, 25), 6),
-      new MyRow(new DateTime(2017, 9, 26), 8),
-      new MyRow(new DateTime(2017, 9, 27), 6),
-      new MyRow(new DateTime(2017, 9, 28), 9),
-      new MyRow(new DateTime(2017, 9, 29), 11),
-      new MyRow(new DateTime(2017, 9, 30), 15),
-      new MyRow(new DateTime(2017, 10, 01), 25),
-      new MyRow(new DateTime(2017, 10, 02), 33),
-      new MyRow(new DateTime(2017, 10, 03), 27),
-      new MyRow(new DateTime(2017, 10, 04), 31),
-      new MyRow(new DateTime(2017, 10, 05), 23),
+      new LinearSales(0, 5),
+      new LinearSales(1, 25),
+      new LinearSales(2, 100),
+      new LinearSales(3, 75),
     ];
 
     return [
-      new charts.Series<MyRow, DateTime>(
-        id: 'Cost',
-        domainFn: (MyRow row, _) => row.timeStamp,
-        measureFn: (MyRow row, _) => row.cost,
+      new charts.Series<LinearSales, int>(
+        id: 'Sales',
+        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        domainFn: (LinearSales sales, _) => sales.year,
+        measureFn: (LinearSales sales, _) => sales.sales,
         data: data,
       )
     ];
   }
 }
 
-/// Sample time series data type.
-class MyRow {
-  final DateTime timeStamp;
-  final int cost;
-  MyRow(this.timeStamp, this.cost);
+/// Sample linear data type.
+class LinearSales {
+  final int year;
+  final int sales;
+
+  LinearSales(this.year, this.sales);
 }

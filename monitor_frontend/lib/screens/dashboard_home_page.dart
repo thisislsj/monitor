@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monitor_frontend/custom_widgets/sensor_grid_card.dart';
 import 'package:monitor_frontend/models/sensor.dart';
+import 'package:monitor_frontend/screens/single_sensor_page.dart';
 import 'package:monitor_frontend/services/sensor_service.dart';
 
 class DashBoardHome extends StatefulWidget {
