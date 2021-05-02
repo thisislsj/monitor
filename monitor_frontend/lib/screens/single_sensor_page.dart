@@ -1,54 +1,78 @@
-/// Line chart example
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:monitor_frontend/models/sensor.dart';
+import 'package:monitor_frontend/models/sensor_log.dart';
+import 'package:monitor_frontend/services/sensor_logs.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
-class PointsLineChart extends StatelessWidget {
-  final List<charts.Series> seriesList;
-  final bool animate;
+class SingleSensorPage extends StatefulWidget {
+  const SingleSensorPage({Key key, @required this.sensor}) : super(key: key);
+  final Sensor sensor;
 
-  PointsLineChart(this.seriesList, {this.animate});
+  @override
+  _SingleSensorState createState() => _SingleSensorState();
+}
 
-  /// Creates a [LineChart] with sample data and no transition.
-  factory PointsLineChart.withSampleData() {
-    return new PointsLineChart(
-      _createSampleData(),
-      // Disable animations for image tests.
-      animate: false,
+class _SingleSensorState extends State<SingleSensorPage> {
+  circularProgress() {
+    return Center(
+      child: CircularProgressIndicator(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return new charts.LineChart(seriesList,
-        animate: animate,
-        defaultRenderer: new charts.LineRendererConfig(includePoints: true));
+    return SafeArea(
+        child: Scaffold(
+      appBar: AppBar(
+        title:
+            Text("${widget.sensor.sensorName} | ${widget.sensor.sensorCode}"),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          FutureBuilder(
+              future:
+                  SensorLogService.getSingleSensorLog(widget.sensor.sensorCode),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text('Error ${snapshot.error}');
+                }
+                if (snapshot.hasData) {
+                  print(snapshot.data);
+                  String val =
+                      "${snapshot.data[snapshot.data.length - 1].sensorValue}";
+                  return Column(
+                    children: [
+                      SizedBox(
+                        height: 50,
+                        child: Center(
+                          child: Text(
+                            "Last Recorded Value: $val ",
+                            textAlign: TextAlign.center,
+                            // style: TextStyle(
+                            //     fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                      SfCartesianChart(
+                        primaryXAxis: DateTimeAxis(),
+                        series: <ChartSeries>[
+                          SplineSeries<SensorLog, dynamic>(
+                            dataSource: snapshot.data,
+                            xValueMapper: (SensorLog data, _) =>
+                                DateTime.parse(data.sensorDataOriginTime),
+                            yValueMapper: (SensorLog data, _) =>
+                                data.sensorValue,
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                }
+                return circularProgress();
+              }),
+        ],
+      ),
+    ));
   }
-
-  /// Create one series with sample hard coded data.
-  static List<charts.Series<LinearSales, int>> _createSampleData() {
-    final data = [
-      new LinearSales(0, 5),
-      new LinearSales(1, 25),
-      new LinearSales(2, 100),
-      new LinearSales(3, 75),
-    ];
-
-    return [
-      new charts.Series<LinearSales, int>(
-        id: 'Sales',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (LinearSales sales, _) => sales.year,
-        measureFn: (LinearSales sales, _) => sales.sales,
-        data: data,
-      )
-    ];
-  }
-}
-
-/// Sample linear data type.
-class LinearSales {
-  final int year;
-  final int sales;
-
-  LinearSales(this.year, this.sales);
 }

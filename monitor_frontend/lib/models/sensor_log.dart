@@ -1,8 +1,8 @@
 class SensorLog {
   String id;
   String sensorCode;
-  DateTime sensorDataOriginTime;
-  double sensorValue;
+  String sensorDataOriginTime;
+  int sensorValue;
   bool alerted;
 
   SensorLog(
@@ -16,9 +16,9 @@ class SensorLog {
     return SensorLog(
       id: json['id'] as String,
       sensorCode: json['sensorCode'] as String,
-      sensorDataOriginTime: json['name'] as DateTime,
-      sensorValue: json['type'] as double,
-      alerted: json['treshold'] as bool,
+      sensorDataOriginTime: json['date'] as String,
+      sensorValue: json['dataValue'] as int,
+      alerted: json['alerted'] as bool,
     );
   }
 }

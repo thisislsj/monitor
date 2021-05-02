@@ -1,67 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:monitor_frontend/models/sensor.dart';
-import 'package:monitor_frontend/screens/temp_chart_page.dart';
+import 'package:monitor_frontend/screens/single_sensor_page.dart';
 
 class SensorCard extends StatelessWidget {
-  final Sensor sensor;
+  SensorCard({Key key, @required this.sensor}) : super(key: key);
 
-  const SensorCard({Key key, @required this.sensor}) : super(key: key);
-  sensorCardClick(Sensor sensor) {
-    print("Tapped ${sensor.sensorName}");
-  }
+  final Sensor sensor;
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      // child: Container(
-      //   padding: EdgeInsets.all(10),
-      //   height: 200,
-
-      //   child: Card(
-
-      //     child: Column(
-      //       children: [
-      //         Text(sensor.sensorName),
-      //       ],
-      //     ),
-      //   ),
-      // ),
-
       child: GestureDetector(
-        onTap: sensorCardClick(sensor),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Container(
+              width: 300,
+              //height: 500,
               padding: EdgeInsets.all(8),
-              //height: 100,
-              //width: 200,
-              color: Colors.green,
+
+              color: (sensor.sensorType == "Temperature")
+                  ? Colors.amber
+                  : ((sensor.sensorType == "Humedity")
+                      ? Colors.blueAccent
+                      : Colors.grey),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     sensor.sensorName,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                   ),
+                  SizedBox(
+                    height: 5,
+                  ),
                   Text(sensor.sensorType),
-                  // Text(
-                  //   '${sensor.sensorThresholdValue}',
-                  //   textAlign: TextAlign.center,
-                  //   style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                  // ),
+                  SizedBox(
+                    height: 5,
+                  ),
                   ElevatedButton(
                     onPressed: () => {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => TempChartPage()),
+                            builder: (context) => SingleSensorPage(
+                                  sensor: sensor,
+                                )),
                       ),
                       print(sensor.sensorCode)
                     },
                     child: Text("View Logs"),
                   ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(sensor.sensorCode)
                 ],
               ),
             ),
@@ -69,8 +64,5 @@ class SensorCard extends StatelessWidget {
         ),
       ),
     );
-    // return Container(
-    //   child: Text(sensor.sensorName),
-    // );
   }
 }

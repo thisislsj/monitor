@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monitor_frontend/custom_widgets/sensor_grid_card.dart';
 import 'package:monitor_frontend/models/sensor.dart';
-import 'package:monitor_frontend/screens/single_sensor_page.dart';
 import 'package:monitor_frontend/services/sensor_service.dart';
 
 class DashBoardHome extends StatefulWidget {
@@ -13,8 +12,9 @@ class _DashBoardHomeState extends State<DashBoardHome> {
   gridview(AsyncSnapshot<List<Sensor>> snapshot) {
     Padding(
       padding: const EdgeInsets.all(5.0),
-      child: GridView.count(
-        crossAxisCount: 2,
+      child: GridView.extent(
+        maxCrossAxisExtent: 20,
+        //crossAxisCount: 2,
         mainAxisSpacing: 4,
         crossAxisSpacing: 4,
         children: snapshot.data.map(
@@ -45,11 +45,22 @@ class _DashBoardHomeState extends State<DashBoardHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         //mainAxisSize: MainAxisSize.min,
         children: [
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            "Monitor Sensor Aleart System",
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 20,
+          ),
           Flexible(
+            // height: 500,
             child: FutureBuilder<List<Sensor>>(
                 future: SensorService.getAllSensors(),
                 builder: (context, snapshot) {
@@ -59,10 +70,11 @@ class _DashBoardHomeState extends State<DashBoardHome> {
                   if (snapshot.hasData) {
                     //gridview
                     //return gridview(snapshot);
-                    return GridView.extent(
-                      maxCrossAxisExtent: 170.0,
-                      crossAxisSpacing: 20.0,
-                      mainAxisSpacing: 20.0,
+                    return GridView.count(
+                      crossAxisCount: 4,
+                      //maxCrossAxisExtent: 170.0,
+                      crossAxisSpacing: 5.0,
+                      mainAxisSpacing: 5.0,
 
                       // crossAxisCount: 4,
                       // mainAxisSpacing: 4,
@@ -82,6 +94,26 @@ class _DashBoardHomeState extends State<DashBoardHome> {
                   }
                   return circularProgress();
                 }),
+          ),
+          SizedBox(
+            height: 60,
+          ),
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                print("New Sensor Created");
+                setState(() {
+                  SensorService.createSensor("TMP-012");
+                });
+              },
+              child: Text(
+                'Add New Sensor',
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
           ),
         ],
       ),
